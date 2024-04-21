@@ -24,7 +24,7 @@ class Payment:
         return f"{self.name} {safe_number}"
 
     def _get_safe_account(self) -> str:
-        return "*" * 2 + self.number[-4:]
+        return '*' * 2 + self.number[-4:]
 
     @property
     def _get_safe_card_number(self) -> str:
@@ -33,12 +33,8 @@ class Payment:
 
     @staticmethod
     def split_card_number_by_blocks(card_number: str) -> str:
-        block_sizes = (4, 4, 4, 4,)
-        result = []
-        for bs in block_sizes:
-            block, tail = card_number[:bs], card_number[bs:]
-            card_number = tail
-        return ' '.join(result)
+        return f'{card_number[:4]} {card_number[4:8]} {card_number[8:12]} {card_number[12:]}'
+
 
 
 class Amount:
