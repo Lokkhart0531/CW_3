@@ -53,7 +53,7 @@ def test_safe_payment_for_card_number():
 
 def test_split_card_number_by_blocks():
     card_number = '7158300734726758'
-    result = Payment.split_card_number_by_blocks(number)
+    result = Payment.split_card_number_by_blocks(card_number)
     assert result == '7158 3007 3472 6758'
 
 def test_init_operation_from_dict(operation_data_without_from):
@@ -71,6 +71,7 @@ def test_init_operation_from_dict(operation_data_without_from):
         "description": "Перевод с карты на карту",
         "to": "Visa Platinum 8990922113665229"
     }
+
     op = Operation.init_from_dict(data)
     assert op.id == 895315941
     assert op.state == 'EXECUTED'
@@ -87,16 +88,16 @@ def test_save_operation_with_from(operation_data_with_from):
     operation = Operation.init_from_dict(operation_data_with_from)
     expected_result = (
         '19.08.2018 Перевод с карты на карту\n'
-        'Visa Classic 6831 98** **** 7658 -> Visa Platinum 8990 92** **** 5229'
+        'Visa Classic 6831 98** **** 7658 -> Visa Platinum 8990 92** **** 5229\n'
         '56883.54 USD'
     )
     assert operation.save() == expected_result
 
-def test_save_operation_with_from(operation_data_without_from):
+def test_save_operation_without_from(operation_data_without_from):
     operation = Operation.init_from_dict(operation_data_without_from)
     expected_result = (
         '19.08.2018 Перевод с карты на карту\n'
-        'Visa Platinum 8990 92** **** 5229'
+        'Visa Platinum 8990 92** **** 5229\n'
         '56883.54 USD'
     )
     assert operation.save() == expected_result

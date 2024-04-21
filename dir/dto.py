@@ -72,7 +72,7 @@ class Operation:
             f"Operation({self.id}, {self.description}, state={self.state}, date={self.date}, amount={self.amount}, from={self.payment_from}, to={self.payment_to}")
 
     def save(self) -> str:
-        lines = [f"{self.date.strftime('%d.%m.%y')} {self.description}"]
+        lines = [f"{self.date.strftime('%d.%m.%Y')} {self.description}"]
         if self.payment_from:
             lines.append(f"{self.payment_from.safe()} -> {self.payment_to.safe()}")
         else:
