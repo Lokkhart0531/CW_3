@@ -2,6 +2,12 @@ from datetime import datetime
 
 
 class Payment:
+    """
+    Весь этот класс занимается получением данных карты/счета.
+    Преобразованием из формата Счет 10848359769870775355 в Счет **5355.
+    Также, если это номер карты, то разбитие на блоки и приведение
+    к нужному формату: Visa Classic 6831 98** **** 7658
+    """
     def __init__(self, name, number):
         self.name = name
         self.number = number
@@ -38,6 +44,10 @@ class Payment:
 
 
 class Amount:
+    """
+    Данный класс работает с денежной суммой. Разделение на
+    name (валюта) и number（сумма)
+    """
     def __init__(self, value, currency_name, currency_code):
         self.value = value
         self.currency_name = currency_name
@@ -48,6 +58,11 @@ class Amount:
 
 
 class Operation:
+    """
+    В данном классе происходят все операции, те инициализация, работа с данными
+    приведение даты к нужному формату из 2018-08-19 в 19.08.2018, возвращение откуда/куда с
+    -> и приведение суммы к формату с двумя знаками после запятой из 79931.0 в 79931.03
+    """
     def __init__(self, operation_id, state, operation_date, amount, description, payment_to, payment_from=None):
         self.id = operation_id
         self.state = state
