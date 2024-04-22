@@ -4,6 +4,9 @@ from dir.dto import Operation
 
 
 def get_operations(filename) -> list[Operation]:
+    """
+    Считывает файл
+    """
     operations: list[Operation] = []
     with open(filename, encoding="utf-8") as f:
         for data in json.load(f):
@@ -13,6 +16,9 @@ def get_operations(filename) -> list[Operation]:
     return operations
 
 def filter_operation_by_state(*operations: Operation, state: str) -> list[Operation]:
+    """
+    Фильтрация операций по state
+    """
     filtered_operations: list[Operation] = []
     for op in operations:
         if op.state == state:
@@ -20,4 +26,7 @@ def filter_operation_by_state(*operations: Operation, state: str) -> list[Operat
     return filtered_operations
 
 def sort_operation_by_date(*operations: Operation) -> list[Operation]:
+    """
+    Сортировка операция по дате(op.date)
+    """
     return sorted(operations, key=lambda op: op.date, reverse=True)
